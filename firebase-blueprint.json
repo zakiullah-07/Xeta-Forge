@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Consultation": {
+      "title": "Consultation",
+      "description": "B2B project consultation brief submitted by potential client",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Client full name", "minLength": 1, "maxLength": 100 },
+        "company": { "type": "string", "description": "Company or organization name", "maxLength": 100 },
+        "email": { "type": "string", "description": "Client contact email", "format": "email" },
+        "projectType": { "type": "string", "description": "Selected engineering service category" },
+        "message": { "type": "string", "description": "Project brief or technical requirements", "maxLength": 5000 },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Submission timestamp" }
+      },
+      "required": ["name", "email", "projectType", "message"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "Conversation history with XETA Forge AI Concierge",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string", "description": "Unique session identifier" },
+        "messages": { "type": "array", "description": "Array of user and assistant messages" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["sessionId", "messages"]
+    }
+  },
+  "firestore": {
+    "/consultations/{consultationId}": {
+      "schema": "Consultation",
+      "description": "Collection of client consultation requests"
+    },
+    "/chat_sessions/{sessionId}": {
+      "schema": "ChatSession",
+      "description": "Collection of chat session logs"
+    }
+  }
+}
